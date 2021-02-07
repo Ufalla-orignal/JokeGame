@@ -15,6 +15,9 @@ Name_screen=pg.display.set_caption('JoKe GaMe')
 clock=pg.time.Clock()
 
 class Button:
+    mouseIsOver=False
+    mouseIsDown=False
+    mouseIsClick=False
     width=0
     # Конструктор
     def __init__(self, color, x, y, width, height):
@@ -72,6 +75,20 @@ while running:
                 new_x=rnd.randint(0, Window.width)
                 new_y=rnd.randint(0, Window.heigth)
                 btn_no.jumpto(new_x, new_y)
+            btn_yes.mouseIsOver=btn_yes.is_over(mouse_x, mouse_y)
+        if btn_yes.mouseIsOver:
+            isClick=0
+            if event.type==pg.MOUSEBUTTONDOWN and \
+                event.button==1:
+                print('Down')
+                isClick+=1   
+            if event.type==pg.MOUSEBUTTONUP and \
+                event.button==1:
+                print('Up')
+                isClick+=1
+            if isClick==2:
+                btn_yes.buttonIsClick=True
+                
             
     btn_yes.draw(screen)
     btn_no.draw(screen)    
