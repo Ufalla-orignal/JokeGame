@@ -11,6 +11,7 @@ class Window:
 
 pg.init()
 screen=pg.display.set_mode((Window.width, Window.heigth))
+Name_screen=pg.display.set_caption('JoKe GaMe')
 clock=pg.time.Clock()
 
 class Button:
@@ -38,10 +39,16 @@ class Button:
 Red=(255, 0, 0)
 White=(255, 255, 255)
 Green=(0, 255, 0)
+Black=(0, 0, 0)
 
 Distance_to_Center_x=50
 Button.width=100
 Button.heigth=30
+
+font=pg.font.Font('freesansbold.ttf', 18)
+text=font.render('Да или нет?', True, Black, White)
+textRect=text.get_rect()
+textRect.center=(Window.center_x, Window.center_y-60)
 
 view_x=Window.center_x-Button.width-Distance_to_Center_x
 view_y=Window.center_y
@@ -52,6 +59,7 @@ btn_no=Button(Red, view_x+Button.width+Distance_to_Center_x*2, view_y, Button.wi
 running=True
 while running:
     screen.fill(White)
+    screen.blit(text, textRect)
     clock.tick(FPS)
     
     list_events=pg.event.get() # Список событий
@@ -66,8 +74,7 @@ while running:
                 btn_no.jumpto(new_x, new_y)
             
     btn_yes.draw(screen)
-    btn_no.draw(screen)
-    
+    btn_no.draw(screen)    
     pg.display.update()
           
 pg.quit()
